@@ -17,11 +17,73 @@ export default class App extends Component {
         this.routerRef = React.createRef();
     }
 
+    // make sure to load an existing cart
     // make API request and set JSON response as state
     async componentDidMount() {
+        let cart = localStorage.getItem("cart");
+
         const products = await axios.get('https://5d6da1df777f670014036125.mockapi.io/api/v1/product');
-        this.setState({products: products.data});
+        cart = cart ? JSON.parse(cart) : {};
+
+        this.setState({ products: products.data, cart });
     }
+
+    // add to cart method
+    // appends the item using the item id as a key for the cart object
+    // using and object rather then array to unable easy data retrieval
+    addToCart = cartItem => {
+        let cart = this.state.cart;
+        // check cart object to see if item already exists
+        if (cart[cartItem.id]) {
+            // if exists, only increase amount
+            cart[cartItem.id].amount += cartItem.amount;
+        } else {
+            // if doesnt, only add to cart
+            cart[cartItem.id] = cartItem;
+        }
+        // ensure user cant add more items than available
+        if (cart[cartItem.id].amount > cart[cartItem.id].product.stock) {
+            cart[cartItem.id].amount = cart[cartItem.id].product.stock;
+        }
+        // save state to pass via context
+        localStorage.setItem("cart", JSON.stringify(cart));
+        this.setState({ cart });
+    };
+
+    // remove an item from cart object
+    removeFromCart = cartItemId => {
+        let cart = this.state.cart;
+        delete cart[cartItemId];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        this.setState({ cart });
+    };
+
+    // clear all items from cart
+    clearCart = () => {
+        let cart = {};
+        localStorage.removeItem("cart");
+        this.setState({ cart });
+    };
+
+    // checkout method (remove products from list and clear cart)
+    checkout = () => {
+        const cart = this.state.cart;
+
+        const products = this.state.products.map(p => {
+        if (cart[p.name]) {
+          p.stock = p.stock - cart[p.name].amount;
+
+          axios.put(
+            `https://5d6da1df777f670014036125.mockapi.io/api/v1/product/${p.id}`,
+            { ...p },
+          )
+        }
+        return p;
+        });
+
+        this.setState({ products });
+        this.clearCart();
+    };
 
     // context with product data and cart events
     // navbar with options (route to each component view)
@@ -45,7 +107,7 @@ export default class App extends Component {
                             aria-label="main navigation"
                             >
                             <div className="navbar-brand">
-                                <figure className="image is-64x64 mt-2 ml-6">
+                                <figure className="image is-64x64 mt-2 ml-5">
                                   <img
                                     src="cenoshine.png"
                                     alt="Logo Cenoura Store"
@@ -88,12 +150,27 @@ export default class App extends Component {
                             </div>
                         </nav>
 
+
                         <Switch>
                             <Route exact path="/" component={ProductList} />
                             <Route exact path="/cart" component={Cart} />
                             <Route exact path="/products" component={ProductList} />
                         </Switch>
+
                     </div>
+                    <footer class="footer mt-6" style={{backgroundColor: '#f0626f', color: '#fff6e3'}}>
+                        <div class="content has-text-centered">
+                            <p>
+                            Feito com ♥ por Rafaela Souza.
+                            </p>
+                            <span class="icon is-medium">
+                                <i class="fab fa-github" style={{color: '#fff6e3'}}></i>
+                            </span>
+                            <span class="icon ml-3 is-medium">
+                                <i class="fab fa-linkedin" style={{color: '#fff6e3'}}></i>
+                            </span>
+                        </div>
+                    </footer>
                 </Router>
         </Context.Provider>
         );

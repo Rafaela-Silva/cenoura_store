@@ -8,12 +8,12 @@ const ProductList = props => {
   return (
     <>
         <div className="container mt-6 mb-5">
-              <h4 className="title">Nossos Produtos</h4>
-              <figure className="image mt-6 mb-3" style={{width: "30%"}}>
-              <img
-              src="separator.svg"
-              alt="Divisor gatinho"
-              />
+              <h4 className="title title-products">Nossos Produtos</h4>
+              <figure className="image image-separator mt-6 mb-3" style={{width: "30%"}}>
+                  <img
+                  src="separator.svg"
+                  alt="Divisor gatinho"
+                  />
               </figure>
         </div>
         <br />

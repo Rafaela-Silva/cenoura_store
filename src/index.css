@@ -1,11 +1,95 @@
 body {
   margin: 0;
-  font-family: 'Yusei Magic', sans-serif;
+  font-family: 'Yusei Magic', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.App {
+    min-height: 100vh;
+}
+
+.is-family-primary {
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+.is-family-secondary {
+    font-family: 'Roboto', sans-serif;
+}
+
+.tag:not(body) {
+    color: green;
+}
+
+.tag:not(body).is-primary {
+    background-color: green;
+}
+
+.button.is-primary.is-outlined{
+    border-color: rgb(240, 98, 111);
+    color: rgb(240, 98, 111);
+}
+.button.is-primary.is-outlined:focus{
+    background-color: rgb(240, 98, 111);
+    border-color: rgb(240, 98, 111);
+    color: #fff;
+}
+.button.is-primary.is-outlined:hover{
+    background-color: rgb(240, 98, 111);
+    border-color: rgb(240, 98, 111);
+    color: #fff;
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    padding: 2rem 1.5rem 2rem;
+}
+
+.navbar {
+    background-color: rgb(240, 98, 111);
+}
+.navbar-item, .navbar-burger{
+    color: rgb(255, 246, 227);
+}
+.navbar-burger{
+    height: 5.25rem;
+}
+.navbar-menu.is-active {
+    background-color: #cc3d4a;
+}
+.navbar-menu .navbar-item:hover {
+    background-color: #cc3d4a;
+    color: rgb(255, 246, 227);
+}
+.navbar-menu .navbar-item:focus {
+    background-color: #cc3d4a;
+    color: rgb(255, 246, 227);
+}
+
+.title-products {
+    color: #f0b800;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.img-cart {
+    transform: rotateY(180deg);
+}
+
+@media screen and (min-width: 768px){
+    .navbar {
+        min-height: 5.25rem;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .container .title-products,  .container .image-separator{
+        margin-left: 2rem;
+    }
+    .container .image-separator {
+        width: 80% !important;
+    }
 }

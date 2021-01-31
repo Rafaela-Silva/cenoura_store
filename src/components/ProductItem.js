@@ -3,7 +3,7 @@ import React from "react";
 const ProductItem = props => {
   const { product } = props;
   return (
-    <div className=" column is-one-quarter">
+    <div className=" column is-one-quarter-desktop is-4-tablet is-full-mobile">
       <div className="card">
 
           <div className="card-image">
