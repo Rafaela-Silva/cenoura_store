@@ -24,14 +24,26 @@ const CartItem = props => {
               <br/>
             </b>
             <br/>
-            <small>{`${amount} unidade(s)`}</small>
-          </div>
-          <div
+
+            <button className="button mr-3 is-danger btn-decrease" onClick={() => props.decreaseQuantity(cartKey)}>
+              <span className="icon is-small">
+                <i className="fas fa-minus"></i>
+              </span>
+            </button>
+            <small className="is-align-self-center">{`${amount} unidade(s)`}</small>
+            <button className="button ml-3 is-success btn-increase" onClick={() => props.increaseQuantity(cartKey)}>
+              <span className="icon is-small">
+                <i className="fas fa-plus"></i>
+              </span>
+            </button>
+
+            </div>
+            <div
             className="media-right"
             onClick={() => props.removeFromCart(cartKey)}
-          >
-            <span className="delete is-large"></span>
-          </div>
+            >
+                <span className="delete is-large"></span>
+            </div>
         </div>
       </div>
     </div>

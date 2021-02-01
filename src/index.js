@@ -4,6 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bulma/css/bulma.css";
 import './index.css';
+import './font-awesome/css/fontawesome.min.css';
+import './font-awesome/css/brands.min.css';
+import './font-awesome/css/all.min.css';
 
 ReactDOM.render(
   <React.StrictMode>

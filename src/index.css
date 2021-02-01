@@ -78,6 +78,10 @@ code {
 .img-cart {
     transform: rotateY(180deg);
 }
+.btn-increase, .btn-decrease {
+    width: 1rem;
+    height: 2rem;
+}
 
 @media screen and (min-width: 768px){
     .navbar {

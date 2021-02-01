@@ -58,6 +58,34 @@ export default class App extends Component {
         this.setState({ cart });
     };
 
+    // increase product amount
+    increaseQuantity = cartItemId => {
+        let cart = this.state.cart;
+        // ensure user cant add more items than available
+        if (cart[cartItemId].amount > cart[cartItemId].product.stock) {
+            cart[cartItemId].amount = cart[cartItemId].product.stock;
+        } else {
+            cart[cartItemId].amount += 1;
+        }
+        // save state to pass via context
+        localStorage.setItem("cart", JSON.stringify(cart));
+        this.setState({ cart });
+    };
+
+    // decrease product amount
+    decreaseQuantity = cartItemId => {
+        let cart = this.state.cart;
+        // ensure user cant decrease to negative amounts
+        if (cart[cartItemId].amount <= 1) {
+            cart[cartItemId].amount = 1;
+        } else {
+            cart[cartItemId].amount -= 1;
+        }
+        // save state to pass via context
+        localStorage.setItem("cart", JSON.stringify(cart));
+        this.setState({ cart });
+    };
+
     // clear all items from cart
     clearCart = () => {
         let cart = {};
@@ -93,6 +121,8 @@ export default class App extends Component {
                 value={{
                     ...this.state,
                     removeFromCart: this.removeFromCart,
+                    increaseQuantity: this.increaseQuantity,
+                    decreaseQuantity: this.decreaseQuantity,
                     addToCart: this.addToCart,
                     addProduct: this.addProduct,
                     clearCart: this.clearCart,
@@ -164,10 +194,10 @@ export default class App extends Component {
                             Feito com ♥ por Rafaela Souza.
                             </p>
                             <span class="icon is-medium">
-                                <i class="fab fa-github" style={{color: '#fff6e3'}}></i>
+                                <a href="https://github.com/Rafaela-Silva?tab=repositories"><i class="fab fa-github fa-2x" style={{color: '#fff6e3'}}></i></a>
                             </span>
-                            <span class="icon ml-3 is-medium">
-                                <i class="fab fa-linkedin" style={{color: '#fff6e3'}}></i>
+                            <span class="icon is-medium ml-4">
+                                <a href="https://www.linkedin.com/in/rafaela-souza-6a00b417a/"><i class="fab fa-linkedin fa-2x" style={{color: '#fff6e3'}}></i></a>
                             </span>
                         </div>
                     </footer>

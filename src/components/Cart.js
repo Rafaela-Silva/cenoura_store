@@ -29,6 +29,8 @@ const Cart = props => {
                 key={key}
                 cartItem={cart[key]}
                 removeFromCart={props.context.removeFromCart}
+                increaseQuantity={props.context.increaseQuantity}
+                decreaseQuantity={props.context.decreaseQuantity}
               />
             ))}
             <div className="column is-12 is-clearfix">
