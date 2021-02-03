@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import withContext from "../withContext";
 import CheckoutItem from "./CheckoutItem";
 
 const Checkout = props => {
-   const { cart } = props.context;
+    const [items, setItems] = useState({});
+    useEffect(() => {
+       setItems(props.context.cart);
+       props.context.clearCart();
+   }, []);
+
+   const cart = items;
    const cartKeys = Object.keys(cart || {});
   return (
     <div className="columns is-centered">
@@ -42,7 +48,7 @@ const Checkout = props => {
               <span class="icon is-small">
                 <i class="fas fa-long-arrow-alt-left"></i>
               </span>
-              <Link to="/products" className="" style={{color: '#fff'}} onClick={props.context.clearCart}>
+              <Link to="/products" className="" style={{color: '#fff'}}>
               Voltar para Produtos
               </Link>
             </button>
