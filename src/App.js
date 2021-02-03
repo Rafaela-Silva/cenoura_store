@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Cart from './components/Cart';
 import ProductList from './components/ProductList';
+import Checkout from './components/Checkout';
 
 import Context from "./Context";
 
@@ -93,26 +94,6 @@ export default class App extends Component {
         this.setState({ cart });
     };
 
-    // checkout method (remove products from list and clear cart)
-    checkout = () => {
-        const cart = this.state.cart;
-
-        const products = this.state.products.map(p => {
-        if (cart[p.name]) {
-          p.stock = p.stock - cart[p.name].amount;
-
-          axios.put(
-            `https://5d6da1df777f670014036125.mockapi.io/api/v1/product/${p.id}`,
-            { ...p },
-          )
-        }
-        return p;
-        });
-
-        this.setState({ products });
-        this.clearCart();
-    };
-
     // context with product data and cart events
     // navbar with options (route to each component view)
     render() {
@@ -126,7 +107,6 @@ export default class App extends Component {
                     addToCart: this.addToCart,
                     addProduct: this.addProduct,
                     clearCart: this.clearCart,
-                    checkout: this.checkout
                 }}
             >
                 <Router ref={this.routerRef}>
@@ -185,6 +165,7 @@ export default class App extends Component {
                             <Route exact path="/" component={ProductList} />
                             <Route exact path="/cart" component={Cart} />
                             <Route exact path="/products" component={ProductList} />
+                            <Route exact path="/checkout" component={Checkout} />
                         </Switch>
 
                     </div>

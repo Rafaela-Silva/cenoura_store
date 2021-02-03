@@ -2,6 +2,7 @@
 
 import React from "react";
 import withContext from "../withContext";
+import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 import CartItem from "./CartItem";
 
 const Cart = props => {
@@ -48,7 +49,9 @@ const Cart = props => {
                   className="button is-success"
                   onClick={props.context.checkout}
                   >
+                  <Link to="/checkout" className="" style={{color: '#fff'}}>
                   Checkout
+                  </Link>
                   </button>
               </div>
             </div>

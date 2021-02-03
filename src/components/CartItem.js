@@ -20,7 +20,7 @@ const CartItem = props => {
             <b style={{ textTransform: "capitalize" }}>
               {product.name}{" "}
               <br/>
-              <span className="tag is-secondary">R$ {product.price}</span>
+              <span className="tag is-secondary">R$ {product.price * amount} </span>
               <br/>
             </b>
             <br/>
